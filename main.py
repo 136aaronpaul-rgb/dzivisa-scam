@@ -1,11 +1,18 @@
-print("=== DZIVISA-SCAM v1.0 ===")
-print("Tool to detect scams in Zimbabwe\n")
+def load_blacklist():
+    with open("numbers.txt", "r") as f:
+        return [line.strip().lower() for line in f]
 
-scam_keywords = ["winner", "lottery", "ecocash pin", "bank verification", "agent fee", "click link", "free airtime", "low balance", "switch_currency", "sms usd to", "renewed", "urgent", "account blocked"]
+def check_scam(message):
+    blacklist = load_blacklist()
+    message_lower = message.lower()
+    for pattern in blacklist:
+        if pattern in message_lower:
+            return True
+    return False
 
-msg = input("Paste the suspicious SMS/WhatsApp message: ")
-
-if any(word in msg.lower() for word in scam_keywords):
-    print("\n⚠️ WARNING: This looks like a scam! Do NOT send money or share codes.")
+print("=== dzivisa-scam v1.0 ===")
+user_input = input("Paste the suspicious SMS/WhatsApp message: ")
+if check_scam(user_input):
+    print("\n⚠️ WARNING: This looks like a scam!")
 else:
-    print("\n✅ No obvious scam keywords found. Still verify the sender.")
+    print("\n✅ No known scam patterns found.")
