@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dzivisa Scam 12</title>
+    <title>Dzivisa Scam 14</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: Arial; background: #e8f5e9; padding: 20px; }
-        .box { background: white; padding: 25px; border-radius: 15px; max-width: 650px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #d32f2f; }
-        select, textarea, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
-        button { background: #d32f2f; color: white; font-weight: bold; cursor: pointer; border: none; }
+        .box { background: white; padding: 25px; border-radius: 15px; max-width: 700px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #d32f2f; text-align: center; }
+        textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
+        button { width: 100%; padding: 12px; margin: 8px 0; background: #d32f2f; color: white; font-weight: bold; cursor: pointer; border: none; border-radius: 8px; font-size: 16px; }
         button:hover { background: #b71c1c; }
-        .result { margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; font-size: 18px; }
-        .footer { margin-top: 30px; color: #555; font-size: 14px; }
+        .card { margin-top: 15px; padding: 15px; background: #fff3e0; border-radius: 8px; border-left: 5px solid #d32f2f; }
+        .tip { margin-top: 8px; padding: 10px; background: #e3f2fd; border-radius: 5px; font-size: 14px; }
+        .footer { margin-top: 30px; color: #555; font-size: 14px; text-align: center; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h1>🇿🇼 Dzivisa Scam 12</h1>
-        <p><b>Namatira message ye scam pano</b> / Paste suspected scam here</p>
+        <h1>🇿🇼 Dzivisa Scam 14</h1>
+        <p><b>Paste once, check everything</b> / Namatira kamwe, ongorora zvese</p>
         
         <form method="POST">
-            <label><b>Choose Check Type:</b></label>
-            <select name="check_type" required>
-                <option value="Message">1. Message Check</option>
-                <option value="WhatsApp">2. WhatsApp Number Check</option>
-                <option value="Call">3. Call Number Check</option>
-                <option value="Facebook">4. Facebook Link Check</option>
-                <option value="Instagram">5. Instagram Check</option>
-                <option value="TikTok">6. TikTok Check</option>
-            </select>
-            
-            <textarea name="user_input" rows="4" placeholder="Paste message, number, or link here..." required></textarea>
-            
-            <button type="submit">Scan for Scam</button>
+            <textarea name="user_input" rows="4" placeholder="Paste message, +2637..., or facebook.com/... link here" required>{{ user_input }}</textarea>
+            <button type="submit">SCAN ALL 6 CHECKS NOW</button>
         </form>
 
-        {% if result %}
-        <div class="result">
-            <h3>{{ result }}</h3>
-        </div>
+        {% if results %}
+            {% for r in results %}
+            <div class="card">
+                <h3>{{ r.type }}</h3>
+                <b>{{ r.result }}</b>
+                <div class="tip">{{ r.tip }}</div>
+            </div>
+            {% endfor %}
         {% endif %}
 
         <div class="footer">
-            How it works: We check for scam words, fake numbers, and tricks used by scammers in Zim.<br>
-            Dzivisa Scam 12 | Protecting Zimbabweans 🇿🇼 | Report scams to 111<br>
+            Dzivisa Scam 14 | Protecting Zimbabweans 🇿🇼 | Report scams to 111<br>
             <b>Built by Aaron Paul</b>
         </div>
     </div>
