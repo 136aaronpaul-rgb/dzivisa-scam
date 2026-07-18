@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dzivisa Scam 12</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial; background: #e8f5e9; padding: 20px; }
+        .box { background: white; padding: 25px; border-radius: 15px; max-width: 650px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #d32f2f; }
+        select, textarea, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
+        button { background: #d32f2f; color: white; font-weight: bold; cursor: pointer; border: none; }
+        button:hover { background: #b71c1c; }
+        .result { margin-top: 20px; padding: 15px; background: #fff3e0; border-radius: 8px; font-size: 18px; }
+        .footer { margin-top: 30px; color: #555; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🇿🇼 Dzivisa Scam 12</h1>
+        <p><b>Namatira message ye scam pano</b> / Paste suspected scam here</p>
+        
+        <form method="POST">
+            <label><b>Choose Check Type:</b></label>
+            <select name="check_type" required>
+                <option value="Message">1. Message Check</option>
+                <option value="WhatsApp">2. WhatsApp Number Check</option>
+                <option value="Call">3. Call Number Check</option>
+                <option value="Facebook">4. Facebook Link Check</option>
+                <option value="Instagram">5. Instagram Check</option>
+                <option value="TikTok">6. TikTok Check</option>
+            </select>
+            
+            <textarea name="user_input" rows="4" placeholder="Paste message, number, or link here..." required></textarea>
+            
+            <button type="submit">Scan for Scam</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h3>{{ result }}</h3>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            How it works: We check for scam words, fake numbers, and tricks used by scammers in Zim.<br>
+            Dzivisa Scam 12 | Protecting Zimbabweans 🇿🇼 | Report scams to 111<br>
+            <b>Built by Aaron Paul</b>
+        </div>
+    </div>
+</body>
+</html>
