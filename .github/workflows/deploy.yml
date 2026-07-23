@@ -1,0 +1,19 @@
+name: Deploy v11.1 to Surge
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g surge
+      - run: |
+          mkdir -p web
+          cp main.py web/ 2>/dev/null || true
+          cp -r * web/ 2>/dev/null || true
+          echo "<h1>dzivisa-scam v11.1</h1><p>Built by Aaron</p>" > web/index.html
+      - run: surge ./web dzivisa-scam-v11.surge.sh --token ${{ secrets.SURGE_TOKEN }}
