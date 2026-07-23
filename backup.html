@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dzivisa-Scam v11.1 by Aaron Paul</title>
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRHppdmlzYS1TY2FtIHYxMS4xIFVuc2hha2FibGUiLCJzaG9ydF9uYW1lIjoiRHppdmlzYSIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMEUwRTE0IiwidGhlbWVfY29sb3IiOiIjMzRDNzU5In0=">
+<style>
+body{background:#0E0E14;color:#fff;font-family:sans-serif;padding:15px}
+h1{color:#34C759;margin:0}.sub{color:#A0A0B0;font-size:13px}.by{color:#34C759;font-weight:bold;font-size:12px;margin:5px 0 15px}
+textarea{width:100%;height:120px;background:#1E1E2E;color:#fff;border:1px solid #34C759;border-radius:10px;padding:10px}
+button{width:100%;background:#34C759;color:#000;font-weight:bold;padding:14px;border:none;border-radius:10px;margin-top:10px;font-size:16px}
+.card{background:#1E1E2E;border-radius:10px;padding:12px;margin-top:12px;border-left:4px solid #34C759}
+.red{border-left-color:#FF3B30}.yellow{border-left-color:#FFCC00}.green{border-left-color:#34C759}
+#result{font-size:22px;font-weight:bold;margin-top:15px}
+.small{font-size:12px;color:#aaa} a{color:#34C759}
+</style>
+</head>
+<body>
+<h1>Dzivisa-Scam v11.1</h1>
+<div class="sub">The Unshakeable Guardian for Zimbabwe</div>
+<div class="by">Built by Aaron Paul - Permanent Offline Shield</div>
+<textarea id="msg" placeholder="Paste ANYTHING: SMS, *151* code, Facebook/IG/WhatsApp/X/Threads/TikTok link..."></textarea>
+<button onclick="analyze()">SCAN NOW - OFFLINE</button>
+<div id="result">Waiting...</div>
+<div id="score"></div>
+<div id="details"></div>
+<script>
+const LEGIT_USSD = ["*151#","*153#","*121#","*140#","*111#","*124#","*144#","*152#","*150#"];
+const REAL_DOMAINS = ["facebook.com","fb.com","instagram.com","whatsapp.com","wa.me","twitter.com","x.com","t.co","threads.net","tiktok.com","ecocash.co.zw","econet.co.zw","netone.co.zw","telecel.co.zw","zimra.co.zw","rbz.co.zw"];
+function get_color_from_hex(h){return h;}
+function getDomain(url){
+  try{ let u = url.startsWith('http')? url : 'https://'+url; return new URL(u).hostname.toLowerCase(); }
+  catch(e){ return url.toLowerCase().split('/')[0]; }
+}
+function analyze(){
+  let raw = document.getElementById('msg').value;
+  let text = raw.toLowerCase();
+  let score=0; let cards=[];
+  let ussdMatches = raw.match(/\*\d+[\*\d+]*#/g) || [];
+  ussdMatches.forEach(code=>{
+    if(!LEGIT_USSD.includes(code)){
+      score+=40;
+      cards.push(`<div class="card red"><b>⚠️ SUSPICIOUS USSD:</b> ${code}<br><span class="small">Legit Zim: ${LEGIT_USSD.join(', ')}. Never enter PIN after * code!</span></div>`);
+    } else {
+      cards.push(`<div class="card green"><b>✅ Known USSD:</b> ${code}</div>`);
+    }
+  });
+  let links = raw.match(/https?:\/\/[^\s]+|www\.[^\s]+|bit\.ly\/[^\s]+|tinyurl[^\s]+|wa\.me\/[^\s]+|fb\.me\/[^\s]+|[a-z0-9-]+\.tk\b|[a-z0-9-]+\.ml\b/g) || [];
+  links.forEach(link=>{
+    let domain = getDomain(link);
+    let isReal = REAL_DOMAINS.some(d=> domain===d || domain.endsWith('.'+d));
+    if((domain.includes("facebook")||domain.includes("fb")) &&!(domain==="facebook.com"||domain.endsWith(".facebook.com")||domain==="fb.com"||domain.endsWith(".fb.com"))){
+      score+=40;
+      cards.push(`<div class="card red"><b>🎭 FAKE FACEBOOK:</b> ${link}<br><span class="small">Domain: ${domain} - Real is only facebook.com</span></div>`);
+    } else if(domain.includes("instagram") &&!(domain==="instagram.com"||domain.endsWith(".instagram.com"))){
+      score+=40;
+      cards.push(`<div class="card red"><b>🎭 FAKE INSTAGRAM:</b> ${link}<br><span class="small">Domain: ${domain}</span></div>`);
+    } else if(domain.includes("tiktok") &&!(domain==="tiktok.com"||domain.endsWith(".tiktok.com"))){
+      score+=40;
+      cards.push(`<div class="card red"><b>🎭 FAKE TIKTOK:</b> ${link}<br><span class="small">Domain: ${domain}</span></div>`);
+    } else if((domain.includes("twitter")||domain==="x.com"||domain.includes("x.com")) &&!(domain==="twitter.com"||domain.endsWith(".twitter.com")||domain==="x.com"||domain.endsWith(".x.com")||domain==="t.co"||domain.endsWith(".t.co"))){
+      score+=35;
+      cards.push(`<div class="card red"><b>🎭 FAKE X/TWITTER:</b> ${link}<br><span class="small">Domain: ${domain}</span></div>`);
+    } else if(domain.includes("threads") &&!(domain==="threads.net"||domain.endsWith(".threads.net"))){
+      score+=35;
+      cards.push(`<div class="card red"><b>🎭 FAKE THREADS:</b> ${link}</div>`);
+    } else if(domain.includes("whatsapp") &&!(domain==="whatsapp.com"||domain.endsWith(".whatsapp.com")||domain==="wa.me")){
+      score+=35;
+      cards.push(`<div class="card red"><b>🎭 FAKE WHATSAPP:</b> ${link}</div>`);
+    } else if(link.includes("bit.ly")||link.includes("tinyurl")||link.includes("t.me")||domain.endsWith(".tk")||domain.endsWith(".ml")){
+      score+=20;
+      cards.push(`<div class="card yellow"><b>🔗 SHORTENED / FREE DOMAIN:</b> ${link}<br><span class="small">Domain: ${domain} - hides real destination</span></div>`);
+    } else {
+      cards.push(`<div class="card ${isReal?'green':'yellow'}"><b>🔗 LINK:</b> ${link}<br><span class="small">Domain: ${domain} - ${isReal?'Known domain':'Unknown, verify'}</span></div>`);
+      if(!isReal) score+=15;
+    }
+  });
+  let patterns = {
+    "EcoCash PIN steal": ["pin yako","secret code","enter pin","ecocash","onemoney"],
+    "Money lure": ["you have won","you have received $","claim your","congratulations","usd 500"],
+    "Platform block scam": ["account blocked","account suspended","verified badge","will be deleted","action required"],
+    "Urgency": ["urgent","immediately","act now","within 24 hours"]
+  };
+  for(let cat in patterns){
+    for(let kw of patterns[cat]){
+      if(text.includes(kw)){
+        score+=18;
+        cards.push(`<div class="card yellow"><b>Pattern:</b> ${cat} - '${kw}'</div>`);
+        break;
+      }
+    }
+  }
+  let res = document.getElementById('result');
+  let scoreEl = document.getElementById('score');
+  let det = document.getElementById('details');
+  let color = score>=70?"#FF3B30":score>=40?"#FFCC00":"#34C759";
+  let label = score>=70?"🚨 HIGH RISK - SCAM! DO NOT CLICK":score>=40?"⚠️ MEDIUM RISK - VERIFY FIRST":"✅ LOW RISK - Safe";
+  res.innerText=label; res.style.color=get_color_from_hex(color);
+  scoreEl.innerText=`Unshakeable Score: ${Math.min(score,100)}/100 | Codes: ${ussdMatches.length} | Links: ${links.length}`;
+  det.innerHTML = cards.join('') || '<div class="card green">No threats found. Stay vigilant - Aaron Paul shield active.</div>';
+  if(score>=40){
+    det.innerHTML+=`<div class="card red"><b>WHAT TO DO:</b><br>1. Don't enter PIN or password<br>2. Don't click<br>3. Report to 114 / Econet / NetOne<br>4. Delete & block</div>`;
+  }
+}
+</script>
+</body>
+</html>
+<!-- PROTECTED BY AARON 2026 -->
+<footer style="background:#000;color:#0f0;text-align:center;padding:20px;margin-top:50px;border-top:3px solid gold">
+  <p>🔒 Built by AARON 🇿🇼 | 23 July 2026 | 136aaronpaul@gmail.com</p>
+  <p>To Help Zimbabwe & Government Save Family Money</p>
+  <p>Original & Protected: dzivisa-scam-v11.surge.sh | All Rights Reserved</p>
+</footer><p style="font-size:11px;color:gray;text-align:center">Disclaimer: Education only - Built by Aaron to protect Zimbabwe families</p>
+<script>document.addEventListener('contextmenu',e=>e.preventDefault());</script>
+</body>

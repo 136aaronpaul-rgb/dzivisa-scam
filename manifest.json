@@ -1,0 +1,13 @@
+{
+  "name": "Dzivisa-Scam v11.1 - Unshakeable Guardian",
+  "short_name": "Dzivisa",
+  "description": "The Unshakeable Guardian for Zimbabwe - Offline scam detector for EcoCash, USSD, Facebook, WhatsApp, Instagram, TikTok. Built by Aaron Paul",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0E0E14",
+  "theme_color": "#34C759",
+  "icons": [
+    {"src":"./logo-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"},
+    {"src":"./logo-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"}
+  ]
+}
